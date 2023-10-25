@@ -43,14 +43,12 @@ app.delete('/api/notes/:id', (req, res) => {
     const noteId = parseInt(req.params.id);
     const notes = JSON.parse(fs.readFileSync(dbFilePath));
     const noteIndex = notes.findIndex((note) => note.id === noteId);
-    if (noteIndex !== -1) {
-        notes.splice(noteIndex, 1);
-        fs.writeFileSync(dbFilePath, JSON.stringify(notes));
-        res.json({ success: true, message: 'Note deleted successfully' });
-    } else {
-        res.status(404).json({ success: false, message: 'Note not found' });
-    }
+    notes.splice(noteIndex, 1);
+    fs.writeFileSync(dbFilePath, JSON.stringify(notes));
+    res.json({ success: true, message: 'Note deleted successfully' });
+
 });
+
 // Start the server
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
