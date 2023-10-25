@@ -19,17 +19,17 @@ app.get('/notes', (req, res) => {
 });
 
 app.get('/api/notes', (req, res) => {
-    res.sendFile(__dirname + '/db/db.json');
+    res.sendFile(__dirname + '/Develop/db/db.json');
 });
 
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
-    const notes = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
+    const notes = JSON.parse(fs.readFileSync('/Develop/db/db.json', 'utf8'));
     const lastNoteId = notes.length > 0 ? notes[notes.length - 1].id : 0;
     const newNoteId = lastNoteId + 1;
     newNote.id = newNoteId;
     notes.push(newNote);
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes));
+    fs.writeFileSync('/Develop/db/db.json', JSON.stringify(notes));
     res.json(newNote);
 });
 
