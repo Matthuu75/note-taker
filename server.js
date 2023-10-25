@@ -24,7 +24,7 @@ app.get('/api/notes', (req, res) => {
 
 app.post('/api/notes', (req, res) => {
     const newNote = req.body;
-    const notes = JSON.parse(fs.readFileSync('/Develop/db/db.json', 'utf8'));
+    const notes = JSON.parse(fs.readFileSync('/Develop/db/db.json'));
     const lastNoteId = notes.length > 0 ? notes[notes.length - 1].id : 0;
     const newNoteId = lastNoteId + 1;
     newNote.id = newNoteId;
